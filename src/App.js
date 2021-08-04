@@ -1,5 +1,5 @@
 import "./App.css";
-import { TextField, makeStyles } from "@material-ui/core";
+import { TextField, makeStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +18,13 @@ function App() {
       <h2>Recipe App</h2>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="outlined-basic" variant="outlined" />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ width: "80px", height: "50px" }}
+        >
+          Search
+        </Button>
       </form>
     </div>
   );
