@@ -12,16 +12,30 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("chicken");
+
+  const updateSearch = () => {
+    setQuery(search);
+    setSearch("");
+  };
 
   return (
     <div className="App">
       <h2>Recipe App</h2>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="outlined-basic" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          type="text"
+          variant="outlined"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <Button
           variant="contained"
           color="primary"
           style={{ width: "80px", height: "50px" }}
+          onClick={updateSearch}
         >
           Search
         </Button>
