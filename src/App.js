@@ -1,6 +1,8 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { TextField, makeStyles, Button } from "@material-ui/core";
+import * as types from "./redux/actionTypes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +23,10 @@ function App() {
     setSearch("");
   };
 
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: types.FETCH_RECIPE_START, query });
+  }, [query]);
   return (
     <div className="App">
       <h2>Recipe App</h2>
