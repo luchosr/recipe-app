@@ -71,9 +71,11 @@ function App() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("chicken");
   const [expanded, setExpanded] = useState(false);
+  const [cardValue, setCardValue] = useState("");
 
-  const handleExpandClick = () => {
+  const handleExpandClick = (index) => {
     setExpanded(!expanded);
+    setCardValue(index);
   };
 
   const { recipes } = useSelector((state) => state.data);
@@ -160,19 +162,25 @@ function App() {
                         className={clsx(cardClasses.expand, {
                           [cardClasses.expandOpen]: expanded,
                         })}
-                        onClick={handleExpandClick}
+                        onClick={() => handleExpandClick(index)}
                         aria-expanded={expanded}
                         aria-label="show more"
                       >
                         <ExpandMoreIcon />
                       </IconButton>
                     </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <Collapse
+                      in={index === cardValue && expanded}
+                      timeout="auto"
+                      unmountOnExit
+                    >
                       <CardContent>
-                        <Typography paragraph>Method:</Typography>
-                        <Typography paragraph></Typography>
-                        <Typography paragraph></Typography>
-                        <Typography paragraph></Typography>
+                        <Typography paragraph>Ingredients:</Typography>
+                        {item.recipe.ingredients.map((items) => (
+                          <Typography paragraph key={item.recipe.label}>
+                            {item.text}
+                          </Typography>
+                        ))}
                         <Typography></Typography>
                       </CardContent>
                     </Collapse>
